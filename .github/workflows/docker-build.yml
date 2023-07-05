@@ -31,9 +31,10 @@ jobs:
 
       - name: Tag Git commit
         run: |
+          git config user.email "sklyarov1998ne@gmail.com"
+          git config user.name "dasklyarov"
           git tag ${{ steps.increment_tag.outputs.tag }}
-          git push --tags
-
+          git push origin ${{ steps.increment_tag.outputs.tag }}
         env:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
