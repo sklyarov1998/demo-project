@@ -1,12 +1,12 @@
-name: Docker Build
+name: Docker Build and Deployment
 
 on:
   push:
     branches:
-      - main  # Replace with the branch you want to trigger the build on
+      - main  # Replace with the branch you want to trigger the build and deployment on
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +24,18 @@ jobs:
         with:
           context: ./my-app
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:1.0
+
+      - name: Get current image tag
+        id: get_tag
+        run: |
+          echo "::set-output name=tag::$(cat deployment.yaml | grep 'image:' | awk -F ':' '{print $3}')"
+
+      - name: Increment image tag
+        id: increment_tag
+        run: |
+          echo "::set-output name=tag::$((${{ steps.get_tag.outputs.tag }} + 1))"
+
+      - name: Update deployment.yaml
+        run: |
+          sed -i "s/{{image
