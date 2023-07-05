@@ -34,6 +34,9 @@ jobs:
           git tag ${{ steps.increment_tag.outputs.tag }}
           git push --tags
 
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
