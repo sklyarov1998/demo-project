@@ -26,14 +26,14 @@ jobs:
         id: get_latest_tag
         run: |
           echo "::set-output name=tag::$(git describe --tags --abbrev=0)"
-
       - name: Increment tag
         id: increment_tag
         run: |
           echo "::set-output name=tag::$((${{ steps.get_latest_tag.outputs.tag }} + 1))"
-
       - name: Tag Git commit
         run: |
+          git config user.email "sklyarov1998ne@gmail.com"
+          git config user.name "dasklyarov"
           git tag ${{ steps.increment_tag.outputs.tag }}
           git push origin ${{ steps.increment_tag.outputs.tag }}
         env:
