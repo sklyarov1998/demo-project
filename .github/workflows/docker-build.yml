@@ -1,0 +1,24 @@
+name: Docker Build
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger the build on
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t myapp .
+
+      - name: Log in to Docker Hub (or other registry)
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push Docker image
+        run: docker push myapp
+
