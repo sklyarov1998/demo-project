@@ -9,4 +9,4 @@ RUN pip install pipenv && \
     pipenv install --deploy
 
 # Run the application
-ENTRYPOINT ["pipenv", "run", "python3", "/app/app.py"]
+ENTRYPOINT ["pipenv", "run", "python3", "app.py"]
