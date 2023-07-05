@@ -1,4 +1,6 @@
-The app.py runs a flask servers listening to port 9000. When accessed on thr default rout it returns "healthy" ("a healt probe"). Rhe server  excepts other rout names as well and returns their reversed verisions as an output. 
+The app.py runs a flask servers listening to port 9000. When accessed on thr default rout it returns "healthy" ("a healt probe"). The server  excepts other rout names as well and returns their reversed verisions as an output. 
+
+The repo runs a workflow triggered by a commit to the main branch. For the workflow to complete successfully set a Docker Hub account and create a PAT. Set DOCKERHUB_TOKEN and DOCKERHUB_USERNAME secrets in your GitHub repo. For more detailed instructions access https://docs.docker.com/build/ci/github-actions/ .
 
 
 Run following commands to clone the repo :<br>
