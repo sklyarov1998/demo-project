@@ -19,32 +19,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:latest
-        
-      - name: Validate tag from Docker meta
-        id: validate_tag
-        run: |
-          current_tag=${{ steps.meta.outputs.labels['org.opencontainers.image.version'] }}
-          if ! [[ "$current_tag" =~ ^[0-9]+$ ]]; then
-            echo "::set-output name=tag_valid::false"
-          else
-            echo "::set-output name=tag_valid::true"
-          fi
-
       - name: Increment tag
         id: increment_tag
         run: |
-          current_tag=${{ steps.meta.outputs.labels['org.opencontainers.image.version'] }}
-          if [[ "$current_tag" =~ ^[0-9]+$ ]]; then
+            current_tag=$(curl -s "https://hub.docker.com/v2/repositories/dasklyarov/myapp/" | jq '.pull_count')
             incremented_tag=$((current_tag + 1))
-          else
-            incremented_tag=2
-          fi
-          echo "::set-output name=tag_incremented::$incremented_tag"
+            echo "::set-output name=tag_incremented::$incremented_tag"
+        
 
       - name: Update image tag for container flask-server in deployment.yaml
         uses: loveholidays/gitops-action-yaml-updater@v1.0
