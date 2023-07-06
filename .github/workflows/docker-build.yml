@@ -51,5 +51,4 @@ jobs:
 
       - name: Push changes
         run: |
-            git push file:///Users/danielsklyarov/Azure1090/demo-project/.git HEAD:main
-        
+            git push file:///Users/danielsklyarov/Azure1090/demo-project/.git HEAD:refs/heads/main
