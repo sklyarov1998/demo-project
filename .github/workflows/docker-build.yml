@@ -48,3 +48,8 @@ jobs:
           context: ./my-app
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag_incremented }}
+
+      - name: Push changes
+        run: |
+            git push file:///Users/danielsklyarov/Azure1090/demo-project/.git HEAD:main
+        
