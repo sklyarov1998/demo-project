@@ -42,5 +42,5 @@ jobs:
           context: ./my-app
           push: true
           tags: ${{ steps.increment_tag.outputs.tag }}
-          github-token: GIT_TOKEN
+          
 
