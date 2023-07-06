@@ -31,13 +31,13 @@ jobs:
         run: |
           sed -i 's/image: dasklyarov\/myapp:[A-Za-z0-9]*/image: dasklyarov\/myapp:${{ steps.increment_tag.outputs.tag_incremented }}/' ./my-app/app-deployment.yaml
     
-      - name: Commit and Push changes
-        run: |
-            git config --local user.email ${{secrets.GIT_EMAIL}}
-            git config --local user.name ${{secrets.GIT_USER}}
+          - name: Commit and Push changes
+          run: |
+            git config --local user.email ${{ secrets.GIT_EMAIL }}
+            git config --local user.name ${{ secrets.GIT_USER }}
             git add ./my-app/app-deployment.yaml
             git commit -m "Update image tag in app-deployment.yaml"
-            git push
+            git push origin main
           
 
       - name: Build and push Docker image
