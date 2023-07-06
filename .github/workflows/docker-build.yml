@@ -27,13 +27,10 @@ jobs:
             echo "::set-output name=tag_incremented::$incremented_tag"
         
 
-      - name: Update image tag for container flask-server in deployment.yaml
-        uses: loveholidays/gitops-action-yaml-updater@v1.0
-        with:
-          mode: IMAGE_TAG
-          container-name: flask-server
-          new-image-tag: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag_incremented }}
-          filepath: ./my-app/app-deployment.yaml
+      - name: Update image tag for container flask-server in app-deployment.yaml
+        run: |
+          sed -i 's/image: dasklyarov\/myapp:[A-Za-z0-9]*/image: dasklyarov\/myapp:${{ steps.increment_tag.outputs.tag_incremented }}/' ./my-app/app-deployment.yaml
+    
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
