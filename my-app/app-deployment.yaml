@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: flask-server
-        image: dasklyarov/myapp:36
+        image: dasklyarov/myapp:39
         ports:
         - containerPort: 9000
