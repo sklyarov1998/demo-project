@@ -30,7 +30,7 @@ jobs:
       - name: Update image tag for container flask-server in app-deployment.yaml
         run: |
 
-          sku install sed
+          sudo apt-get install sed
           sed -i 's/image: dasklyarov\/myapp:[A-Za-z0-9]*/image: dasklyarov\/myapp:${{ steps.increment_tag.outputs.tag_incremented }}/' ./my-app/app-deployment.yaml
     
       - name: Commit and Push changes
