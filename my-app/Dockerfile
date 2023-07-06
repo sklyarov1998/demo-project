@@ -1,7 +1,5 @@
 FROM python:3.9-alpine
 
-RUN apk update && apk add sed
-
 WORKDIR /app
 
 COPY app.py Pipfile ./
