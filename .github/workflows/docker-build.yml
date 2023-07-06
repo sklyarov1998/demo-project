@@ -42,4 +42,6 @@ jobs:
           context: ./my-app
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.increment_tag.outputs.tag }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
