@@ -36,8 +36,7 @@ jobs:
             mode: IMAGE_TAG
             container-name: flask-server
             new-image-tag: ${{ secrets.DOCKERHUB_USERNAME }}-${{ steps.increment_tag.outputs.tag }}
-            dir: ./my-app
-            files: ./my-app/app-deployment.yaml
+            filepath: ./my-app/app-deployment.yaml
 
 
       - name: Build and push Docker image
