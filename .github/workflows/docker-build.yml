@@ -41,6 +41,6 @@ jobs:
         with:
           context: ./my-app
           push: true
-          tags: ${{ steps.increment_tag.outputs.tag }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag }}
           
 
