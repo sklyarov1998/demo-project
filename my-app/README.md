@@ -2,7 +2,7 @@ The app.py runs a flask servers listening to port 9000. When accessed on the def
 
 The repo runs a workflow triggered by a commit to the main branch. For the workflow to complete successfully set a Docker Hub account and create a PAT. Set DOCKERHUB_TOKEN and DOCKERHUB_USERNAME secrets in your GitHub repo. For more detailed instructions access https://docs.docker.com/build/ci/github-actions/ .
 
-You can set a CI pipeline runned by ArgoCD. For further instructions check [CI.md](./CI.md) 
+You can set a CI pipeline runned by ArgoCD. For further instructions check [CI.md](../CI.md) 
 
 
 
