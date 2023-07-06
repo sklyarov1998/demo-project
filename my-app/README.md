@@ -1,17 +1,8 @@
 The app.py runs a flask servers listening to port 9000. When accessed on the default rout it returns "healthy" ("a healt probe"). The server  excepts other rout names as well and returns their reversed verisions as an output. 
 
-The repo runs a workflow triggered by a commit to the main branch. For the workflow to complete successfully set a Docker Hub account and create a PAT. Set DOCKERHUB_TOKEN and DOCKERHUB_USERNAME secrets in your GitHub repo. For more detailed instructions access https://docs.docker.com/build/ci/github-actions/ .
+You can set a CD pipeline runned by GitHub Actions. The workflow will build the image, update its tag, update the image tag used in app-deployment.yaml and upload the built image with the new tag to the Docker Hub.  For further instructions check [CI.md](./CI.md)
 
-You can set a CI pipeline runned by ArgoCD. For further instructions check [CI.md](../CI.md) 
-
-
-
-U can run a deployment set using the built image from the Docker Hub. You are required to have Docker and Kubernetes installed. 
-
-Run the following command to deploy the set:
-
-kubectl create -f app-deployment.yaml
-
+You can set a CI pipeline runned by ArgoCD. To do so insure installment of Docker,Kubernetes and Helm. For further instructions for Argo CD installment check [CD.md](./CD.md). 
 
 Run following commands to clone the repo :
 
