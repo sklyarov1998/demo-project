@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/sklyarov1998/demo-project
     targetRevision: main
-    path: infra/my-app
+    path: my-app
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
