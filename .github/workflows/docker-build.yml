@@ -29,10 +29,12 @@ jobs:
 
       - name: Update image tag for container flask-server in app-deployment.yaml
         run: |
+
+          sku install sed
           sed -i 's/image: dasklyarov\/myapp:[A-Za-z0-9]*/image: dasklyarov\/myapp:${{ steps.increment_tag.outputs.tag_incremented }}/' ./my-app/app-deployment.yaml
     
-          - name: Commit and Push changes
-          run: |
+      - name: Commit and Push changes
+        run: |
             git config --local user.email ${{ secrets.GIT_EMAIL }}
             git config --local user.name ${{ secrets.GIT_USER }}
             git add ./my-app/app-deployment.yaml
