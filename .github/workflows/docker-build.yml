@@ -33,7 +33,7 @@ jobs:
       - name: Update app-deploynet.yaml
         uses: rmeneely/update-yaml@v1
         with:
-          infile: my-app/app-deploynet.yaml
+          infile: my-app/app-deployment.yaml
           varlist: 'spec.template.spec.containers[0].image=${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag }}'
           
       - name: Build and push Docker image
