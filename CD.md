@@ -1,6 +1,6 @@
 Insure installation of Helm and run the following commands:
 
-<h4>>Add the Argo Helm repository:</h4>
+<h4>Add the Argo Helm repository:</h4>
 
 helm repo add argo https://argoproj.github.io/argo-helm
 

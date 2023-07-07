@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    # paths:
+    #   - 'integration/**'
 
 jobs:
   build:
@@ -31,13 +33,13 @@ jobs:
         run: |
 
           sudo apt-get install sed
-          sed -i 's/image: ${{ secrets.DOCKERHUB_USERNAME }}\/myapp:[A-Za-z0-9]*/image: ${{ secrets.DOCKERHUB_USERNAME }}\/myapp:${{ steps.increment_tag.outputs.tag_incremented }}/' ./my-app/app-deployment.yaml
+          sed -i 's/image: ${{ secrets.DOCKERHUB_USERNAME }}\/myapp:[A-Za-z0-9]*/image: ${{ secrets.DOCKERHUB_USERNAME }}\/myapp:${{ steps.increment_tag.outputs.tag_incremented }}/' ./deployment/app-deployment.yaml
     
       - name: Commit and Push changes
         run: |
             git config --local user.email ${{ secrets.GIT_EMAIL }}
             git config --local user.name ${{ secrets.GIT_USER }}
-            git add ./my-app/app-deployment.yaml
+            git add ./deployment/app-deployment.yaml
             git commit -m "Update image tag in app-deployment.yaml"
             git push origin main
           
@@ -45,6 +47,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./my-app
+          context: ./integrarion
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag_incremented }}

@@ -9,9 +9,4 @@ Run following commands to clone the repo :
 mkdir ~/demo-project<br>
 cd ~/demo-project<br>
 git init<br>
-giot clone git@github.com:sklyarov1998/demo-project.git<br>
-
-Run the following commands to run the code in a docker comtainer (docker has to be instulled as a prerequisite):
-
-docker build -t myapp<br>
-docker run --name mycontainer -p 9000:9000 myapp
+git clone git@github.com:sklyarov1998/demo-project.git<br>
