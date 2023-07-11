@@ -21,6 +21,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./integration
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag_incremented }}
+
+
       - name: Increment tag
         id: increment_tag
         run: |
@@ -44,9 +53,3 @@ jobs:
             git push origin main
           
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./integration
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag_incremented }}
