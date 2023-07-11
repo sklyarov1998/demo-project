@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'integration/**'
+#     paths:
+#       - 'integration/**'
 
 jobs:
   build:
@@ -21,6 +21,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+
       - name: Increment tag
         id: increment_tag
         run: |
@@ -35,6 +36,15 @@ jobs:
           sudo apt-get install sed
           sed -i 's/image: ${{ secrets.DOCKERHUB_USERNAME }}\/myapp:[A-Za-z0-9]*/image: ${{ secrets.DOCKERHUB_USERNAME }}\/myapp:${{ steps.increment_tag.outputs.tag_incremented }}/' ./deployment/app-deployment.yaml
     
+    
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./integration
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag_incremented }}
+
+
       - name: Commit and Push changes
         run: |
             git config --local user.email ${{ secrets.GIT_EMAIL }}
@@ -44,9 +54,3 @@ jobs:
             git push origin main
           
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: ./integration
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/myapp:${{ steps.increment_tag.outputs.tag_incremented }}
