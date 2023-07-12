@@ -21,7 +21,7 @@ helm install argo-cd argo/argo-cd \ <br>
 
 <h4>Port forward the Argo CD server to access the GUI:</h4>
 
-kubectl port-forward service/argo-cd-argocd-server -n argocd 8080:443 &
+kubectl port-forward service/argocd-server -n argocd 8080:443 &
 
 <h4>Access the Argo CD GUI by opening http://localhost:8080 in your web browser.</h4>
 
